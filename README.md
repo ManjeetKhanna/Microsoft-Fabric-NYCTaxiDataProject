@@ -69,3 +69,21 @@ Before starting the project, ensure you have:
 - Access to a **Microsoft Fabric** environment  
 - Basic knowledge of **SQL**, **ETL**, **data warehousing**, and **Power BI**  
 - Familiarity with concepts like **Lakehouse**, **Warehousing**, and **Semantic Models**
+
+## Pipeline: pl_stg_processing_nyctaxi
+
+Overall Pipeline:
+![pl_stg_processing_pipeline](https://github.com/user-attachments/assets/2287cf80-e992-4a9e-a458-e78ee8eb9933)
+
+### 📌 Latest Processed Data
+
+**Script Activity**: `Latest Processed Data`  
+This activity retrieves the most recent processed pickup date for the table `staging_nyctaxi_yellow`.
+
+```sql
+SELECT TOP 1 
+latest_processed_pickup 
+FROM metadata.processing_log 
+WHERE table_processed = 'staging_nyctaxi_yellow'
+ORDER BY latest_processed_pickup DESC;
+
