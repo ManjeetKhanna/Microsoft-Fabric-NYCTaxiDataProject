@@ -85,23 +85,30 @@ latest_processed_pickup
 FROM metadata.processing_log 
 WHERE table_processed = 'staging_nyctaxi_yellow'
 ORDER BY latest_processed_pickup DESC;
+```
 
 **v_date**
 Pipeline expression for v_date Set Variable activity
+```
 @formatDateTime(addToTime(activity('Latest Processed Date').output.resultSets[0].rows[0].latest_processed_pickup, 1, 'Month'), 'yyyy-MM')
+```
 
 **v_end_date**
 Pipeline expression for v_end_date Set Variable activity
+```
 @addToTime(concat(variables('v_date'), '-01'),1,'Month')
+```
 
 **SP Removing Outlier Dates**
 For the Stored Procedure Activity “SP Removing Outlier Dates”.
 Create the Stored Procedure stg.data_cleaning_stg in the Data Warehouse using the code below.
+```
 create procedure stg.data_cleaning_stg
 @end_date datetime2,
 @start_date datetime2
 as
 delete from stg.nyctaxi_yellow where tpep_pickup_datetime < @start_date or tpep_pickup_datetime > @end_date;
+```
 
 ![pl_pres_processing_nyctaxi](https://github.com/user-attachments/assets/49652cef-8bf3-4d5a-b2c7-4129e02786ce)
 ![Data Flow](https://github.com/user-attachments/assets/d4fe70ef-ba32-4541-9cc5-7c6ccad360d9)
