@@ -109,7 +109,11 @@ create procedure stg.data_cleaning_stg
 as
 delete from stg.nyctaxi_yellow where tpep_pickup_datetime < @start_date or tpep_pickup_datetime > @end_date;
 ```
-
+## Pipeline: pl_pres_processing_nyctaxi
 ![pl_pres_processing_nyctaxi](https://github.com/user-attachments/assets/49652cef-8bf3-4d5a-b2c7-4129e02786ce)
+
+## data Flow
 ![Data Flow](https://github.com/user-attachments/assets/d4fe70ef-ba32-4541-9cc5-7c6ccad360d9)
+
+## pl_orchestrate_nyctaxi
 ![pl_orchestrate_nyctaxi](https://github.com/user-attachments/assets/d250a88a-ece9-41ac-8955-29a7cfb9128c)
